@@ -9,10 +9,10 @@
 
 	// The first parameter can be used to specify which mesh to import. Here we import all meshes
 	BABYLON.SceneLoader.ImportMesh("Jeep", "./Assets/", "Jeep.babylon", scene, function (newMeshes) {
-		var cat = newMeshes[0];
+		var jeep = newMeshes[0];
 
 		// Set the target of the camera to the first imported mesh
-		camera.target = cat;
+		camera.target = jeep;
 
 		var decalMaterial = new BABYLON.StandardMaterial("decalMat", scene);
 		decalMaterial.diffuseTexture = new BABYLON.Texture("./Assets/impact.png", scene);
@@ -25,11 +25,11 @@
 			}
 
 			// check if we are under a mesh
-			var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh === cat; });
+			var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh === jeep; });
 			if (pickInfo.hit) {
 				var decalSize = new BABYLON.Vector3(10, 10, 10);
 
-				var newDecal = BABYLON.Mesh.CreateDecal("decal", cat, pickInfo.pickedPoint, pickInfo.getNormal(true), decalSize);
+				var newDecal = BABYLON.Mesh.CreateDecal("decal", jeep, pickInfo.pickedPoint, pickInfo.getNormal(true), decalSize);
 				newDecal.material = decalMaterial;
 			}
 		}
